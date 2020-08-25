@@ -10,33 +10,21 @@ app.use(bodyParser.json());
 
 const heroesService = "http://localhost:8081";
 
-const threats = [
-  {
-    id: 1,
-    displayName: "Pisa tower is about to collapse.",
-    necessaryPowers: ["flying"],
-    img: "tower.jpg",
-    assignedHero: 0,
-  },
-  {
-    id: 2,
-    displayName: "Engineer is going to clean up server-room.",
-    necessaryPowers: ["teleporting"],
-    img: "mess.jpg",
-    assignedHero: 0,
-  },
-  {
-    id: 3,
-    displayName: "John will not understand the joke",
-    necessaryPowers: ["clairvoyance"],
-    img: "joke.jpg",
-    assignedHero: 0,
-  },
-];
-
 app.get("/threats", (req, res) => {
   console.log("Returning threats list");
-  res.send(threats);
+  axios({
+    method: "get",
+    url: "https://api.jsonbin.io/b/5f44d376993a2e110d35e6b7",
+    headers: {
+      "secret-key":
+        "$2b$10$/FEAS8rdsgU05WApMWNsdOlOUhTnalLffRw8Degx5j2IsgVUG871G",
+    },
+  })
+    .then((response) => {
+      console.log(response.data);
+      res.send(response.data);
+    })
+    .catch((err) => console.log(err));
 });
 
 app.post("/assignment", (req, res) => {
