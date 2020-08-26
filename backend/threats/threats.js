@@ -14,11 +14,12 @@ app.get("/threats", (req, res) => {
   console.log("Returning threats list");
   axios({
     method: "get",
-    url: "https://api.jsonbin.io/b/5f44d376993a2e110d35e6b7",
-    headers: {
-      "secret-key":
-        "$2b$10$/FEAS8rdsgU05WApMWNsdOlOUhTnalLffRw8Degx5j2IsgVUG871G",
-    },
+    url: "https://my-json-server.typicode.com/Reine0017/json-temp/threats",
+    // url: "https://api.jsonbin.io/b/5f44d376993a2e110d35e6b7",
+    // headers: {
+    //   "secret-key":
+    //     "$2b$10$/FEAS8rdsgU05WApMWNsdOlOUhTnalLffRw8Degx5j2IsgVUG871G",
+    // },
   })
     .then((response) => {
       console.log(response.data);
@@ -35,21 +36,35 @@ app.post("/assignment", (req, res) => {
     data: `{
             "busy": true
         }`,
-  }).then(
-    (heroResponse) => {
-      console.log(heroResponse);
-      const threatId = parseInt(req.body.threatId);
-      const threat = threats.find((subject) => subject.id === threatId);
-      threat.assignedHero = req.body.heroId;
-      res.status(202).send(threat);
-    },
-    (error) => {
-      console.log(error);
-      res
-        .status(400)
-        .send({ problem: `Hero Service responded with issue ${error}` });
-    }
-  );
+  }).then((heroResponse) => {
+    console.log(heroResponse);
+    const threatId = parseInt(req.body.threatId);
+    axios({
+      method: "get",
+      url: "https://my-json-server.typicode.com/Reine0017/json-temp/threats",
+      // url: "https://api.jsonbin.io/b/5f44d376993a2e110d35e6b7",
+      // headers: {
+      //   "secret-key":
+      //     "$2b$10$/FEAS8rdsgU05WApMWNsdOlOUhTnalLffRw8Degx5j2IsgVUG871G",
+      // },
+    })
+      .then((response) => {
+        console.log(response.data);
+        const threats = response.data;
+        return threats;
+      })
+      .then((threats) => {
+        const threat = threats.find((subject) => subject.id === threatId);
+        threat.assignedHero = req.body.heroId;
+        res.status(202).send(threat);
+      })
+      .catch((error) => {
+        console.log(error);
+        res
+          .status(400)
+          .send({ problem: `Hero Service responded with issue ${error}` });
+      });
+  });
 });
 
 app.use("/img", express.static(path.join(__dirname, "img")));
