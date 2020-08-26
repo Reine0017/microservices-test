@@ -15,11 +15,6 @@ app.get("/threats", (req, res) => {
   axios({
     method: "get",
     url: "https://my-json-server.typicode.com/Reine0017/json-temp/threats",
-    // url: "https://api.jsonbin.io/b/5f44d376993a2e110d35e6b7",
-    // headers: {
-    //   "secret-key":
-    //     "$2b$10$/FEAS8rdsgU05WApMWNsdOlOUhTnalLffRw8Degx5j2IsgVUG871G",
-    // },
   })
     .then((response) => {
       console.log(response.data);

@@ -12,11 +12,6 @@ app.get("/heroes", (req, res) => {
   axios({
     method: "get",
     url: "https://my-json-server.typicode.com/Reine0017/json-temp/heroes",
-    // url: "https://api.jsonbin.io/b/5f44c853993a2e110d35e232",
-    // headers: {
-    //   "secret-key":
-    //     "$2b$10$/FEAS8rdsgU05WApMWNsdOlOUhTnalLffRw8Degx5j2IsgVUG871G",
-    // },
   })
     .then((response) => {
       console.log(response.data);
@@ -31,11 +26,6 @@ app.get("/powers", (req, res) => {
   axios({
     method: "get",
     url: "https://my-json-server.typicode.com/Reine0017/json-temp/powers",
-    // url: "https://api.jsonbin.io/b/5f44d2d3514ec5112d0dc0b9",
-    // headers: {
-    //   "secret-key":
-    //     "$2b$10$/FEAS8rdsgU05WApMWNsdOlOUhTnalLffRw8Degx5j2IsgVUG871G",
-    // },
   })
     .then((response) => {
       console.log(response.data);
@@ -50,11 +40,6 @@ app.post("/hero/**", (req, res) => {
   axios({
     method: "get",
     url: "https://my-json-server.typicode.com/Reine0017/json-temp/heroes",
-    // url: "https://api.jsonbin.io/b/5f44c853993a2e110d35e232",
-    // headers: {
-    //   "secret-key":
-    //     "$2b$10$/FEAS8rdsgU05WApMWNsdOlOUhTnalLffRw8Degx5j2IsgVUG871G",
-    // },
   })
     .then((response) => {
       console.log(response.data);
